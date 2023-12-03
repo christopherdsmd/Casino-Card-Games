@@ -9,10 +9,8 @@ BlackJack::BlackJack()
     BJmoney = 0.00;   //starting money
     BJbet = 0.00;         //current user bet
     MAXCARDS = 10;
-
     playerbj = false;       
     dealerbj = false;
-
     insurance = false;    //insurance from check insurance
 }
 

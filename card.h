@@ -21,7 +21,6 @@ const char diamond[4] = "\xe2\x99\xa6";
 class Card //stores deck of card and multiuse function for diffrent card games
 {
     private:
-
         ACard Cards[52];  //array - deck of 52 cards 
         int nextCard;    //return index for next available card 
 

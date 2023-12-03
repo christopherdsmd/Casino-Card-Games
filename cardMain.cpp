@@ -1,6 +1,5 @@
 //programmer: Christopher Desmond
-//COSC 220 - Dr. Park 
-//project 1 part 3 - Casino Card Game with Inheritance, Poker & Black Jack Games 
+//project - Casino Card Game with Inheritance, Poker & Black Jack Games 
 #include<iostream>
 #include<iomanip>
 #include<ctime>
@@ -40,7 +39,6 @@ cout << spade << club << heart << diamond << " Welcome to Casino Games! " << spa
 poker.printArt();
 
 //ask for game money here 
-
     while(userValue != 3) //game menu
     {
     cout << spade << club << heart << diamond << " Card Games Menu " << spade << club << heart << diamond << endl;
