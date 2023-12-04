@@ -1,4 +1,4 @@
-# Casino Card Games
+# Casino Card Games Program
 <img width="458" alt="Screenshot 2023-12-04 at 1 30 43 PM" src="https://github.com/christopherdsmd/Casino-Card-Games/assets/104523163/d815e65b-6199-4811-8131-9767e8b284ee">
 
 Welcome to Casino Card Games, a C++ terminal-based playing card game project that incorporates inheritance and object-oriented design principles. Designed with open source approach, developers are free to use the playing card printing algorithm to develop their own card games.
