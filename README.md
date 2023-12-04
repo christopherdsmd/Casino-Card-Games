@@ -7,7 +7,7 @@ Welcome to Casino Card Games, a C++ terminal-based playing card game project tha
 
 ### 1. Inheritable Playing Card Printing Algorithm
 <img width="511" alt="Screenshot 2023-12-04 at 1 31 05 PM" src="https://github.com/christopherdsmd/Casino-Card-Games/assets/104523163/e36e4a66-759a-4873-af83-28b08cf31417"> <br>
-The project implements a robust algorithm for visually presenting playing cards to the user in the terminal. The design ensures clarity and a user-friendly interface. Reusable code for developers to create their own card games
+The project implements an algorithm for visually presenting playing cards to the user in the terminal. The design is easy to use and user-friendly. Reusable code for developers to create their own card games
 
 ### 2. Poker Game Functionality
 <img width="478" alt="Screenshot 2023-12-04 at 1 38 58 PM" src="https://github.com/christopherdsmd/Casino-Card-Games/assets/104523163/50714c28-3d2e-448f-8387-aaf8ad79d31b"> <br>
