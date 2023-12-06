@@ -35,7 +35,7 @@ double gameMoneyBJ = -1;  //balance for each individual game
 double BJbet = -1;          //holds user BLACK JACK GAME bet value 
 double betMultiplyBJ = -1;      //BJ Game winning hands multipler for bet
 
-cout << spade << club << heart << diamond << " Welcome to Casino Games! " << spade << club << heart << diamond << endl;
+cout << spade << club << heart << diamond << " Welcome to Casino Card Games! " << spade << club << heart << diamond << endl;
 poker.printArt();
 
 //ask for game money here 

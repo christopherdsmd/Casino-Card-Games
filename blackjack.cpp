@@ -156,7 +156,7 @@ void BlackJack::checkWinner()   //rewards - return bet value multiplier
         //if insurance was purchased - insurance == true 
         //bet was halfed in checkinsurance()
         cout << "Insurance returned - $" << BJbet << endl;  //return bet that was subtracted in half from insurance
-        BJmoney += BJbet;    //update starting money
+        BJmoney -= BJbet;    //update starting money
         setBJbet(BJbet);
         setBJMoney(BJmoney);  //update class starting money
         } else {
@@ -176,7 +176,7 @@ void BlackJack::checkWinner()   //rewards - return bet value multiplier
                      //if insurance was purchased - insurance == true 
                     //bet was halfed in checkinsurance()
                     cout << "Insurance returned - $" << BJbet << endl;  //return bet that was subtracted in half from insurance
-                    BJmoney += BJbet;    //update starting money
+                    BJmoney -= BJbet;   //subtract the bet
                     setBJbet(BJbet);
                     setBJMoney(BJmoney);  //update class starting money
                     } else {
@@ -234,7 +234,7 @@ void BlackJack::checkWinner()   //rewards - return bet value multiplier
                      //if insurance was purchased - insurance == true 
                     //bet was halfed in checkinsurance()
                     cout << "Insurance returned - $" << BJbet << endl;  //return bet that was subtracted in half from insurance
-                    BJmoney += BJbet;    //update starting money
+                    BJmoney -= BJbet;   //subtract the bet
                     setBJbet(BJbet);
                     setBJMoney(BJmoney);  //update class starting money
                     } else {
@@ -274,7 +274,7 @@ void BlackJack::checkWinner()   //rewards - return bet value multiplier
                      //if insurance was purchased - insurance == true 
                     //bet was halfed in checkinsurance()
                     cout << "Insurance returned - $" << BJbet << endl;  //return bet that was subtracted in half from insurance
-                    BJmoney += BJbet;    //update starting money
+                   BJmoney -= BJbet;   //subtract the bet
                     setBJMoney(BJmoney);  //update class starting money
                     } else {
             BJmoney -= BJbet;   //subtract the bet
