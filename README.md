@@ -22,10 +22,10 @@ Classic Blackjack card game, user plays against an AI dealer in an attempt to ou
 1. Clone the repository to your local machine. <br>
    git clone https://github.com/christopherdsmd/Casino-Card-Games.git
 
-2. compile to program <br>
+2. Compile to program <br>
      make
 
-3. execute program <br>
+3. Execute program <br>
      ./card
 
    
