@@ -105,8 +105,10 @@ poker.printArt();
             //win multiply
             if(betMultiply != -1) 
             {
+                gameMoneyPoker = gameMoneyPoker + usrBet; // return the inital bet 
                 usrBet = usrBet * betMultiply;  //multiply the bet 
                 gameMoneyPoker = gameMoneyPoker + usrBet;
+                poker.setStartMon(gameMoneyPoker);  //update class staring money
                 cout << "You Won! " << "$" << fixed << setprecision(2) << usrBet << "- added to credit" <<  endl;    //print remaning credit   << usrBet;        
             } else 
             {
@@ -213,6 +215,9 @@ poker.printArt();
     case 3: //exit program
         cout << "Exiting Program - Thanks for playing" << endl;
         exit(0);
+
+        //print Credit - Cash out
+
         break;
 
     default:

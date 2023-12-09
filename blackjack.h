@@ -17,7 +17,7 @@ class BlackJack: public Card    //inherit card class
 
     public:    
         BlackJack();    //constructor set values to 0
-        ACard BJdealerHand[10];     //dealer hand  
+        ACard BJdealerHand[10];     //dealer hand   
         ACard BJplayerHand[10];     //player hand - size 10 for max number of cards in hand
 
         double getBJMoney();        //get starting game money
