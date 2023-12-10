@@ -24,23 +24,33 @@ int userValue = -1;
 //poker variables
 const int handSize = 5;     //hand size for poker
 
-double gameMoneyPoker = -1;  //balance for each individual game
+double gameMoney = -1;  //balance for each individual game
 double usrBet = -1;            //holds user bet value 
 double betMultiply = -1;        //winning hands multipler for bet
 
 //blackjack variables
 const int MAXCARDS = 10;
 
-double gameMoneyBJ = -1;  //balance for each individual game
 double BJbet = -1;          //holds user BLACK JACK GAME bet value 
 double betMultiplyBJ = -1;      //BJ Game winning hands multipler for bet
+double newGameMoney = 0.00;
 
 cout << spade << club << heart << diamond << " Welcome to Casino Card Games! " << spade << club << heart << diamond << endl;
 poker.printArt();
 
+    //get starting money for game
+    gameMoney = poker.getGameMoney(); 
+    poker.setGameMoney(gameMoney);
+    cout << "\n";//line break
+
+
 //ask for game money here 
     while(userValue != 3) //game menu
     {
+        
+    //print Credit - Cash out
+    cout << "$" << fixed << setprecision(2) << gameMoney << " - Credit" << endl << endl;    //print remaning credit 
+
     cout << spade << club << heart << diamond << " Card Games Menu " << spade << club << heart << diamond << endl;
     cout << "1: 5 Card Poker" << endl;
     cout << "2: Black Jack" << endl;
@@ -57,25 +67,22 @@ poker.printArt();
 
     switch(userValue)
     {
-    case 1: //poker game
+        //POKER CODE
+    case 1: 
         cout << endl << spade << club << heart << diamond << " Five Card Poker!  " << spade << club << heart << diamond  << endl;     
-
-        //get starting money for each game
-        gameMoneyPoker = poker.getstartMon(); 
-        poker.setStartMon(gameMoneyPoker);
 
         //game loop
         while(playAgain == 'y') {
           betMultiply = -1;       //reset bet multiplier
 
-            cout << "$" << fixed << setprecision(2) << gameMoneyPoker << " - Credit" <<  endl;    //print remaning credit 
+            cout << "$" << fixed << setprecision(2) << gameMoney << " - Credit" <<  endl;    //print remaning credit 
             //get bet for each round 
                     
-            poker.setStartMon(gameMoneyPoker);  //update class staring money
-            usrBet = poker.getuserBet();    
-            gameMoneyPoker = gameMoneyPoker - usrBet;    //update staring money
+            poker.setGameMoney(gameMoney);  //update class staring money
+            usrBet = poker.getuserBet(gameMoney);    
+            gameMoney = gameMoney - usrBet;    //update staring money
 
-            cout << "$" << fixed << setprecision(2) << gameMoneyPoker << " - Credit" <<  endl;    //print remaning credit 
+            cout << "$" << fixed << setprecision(2) << gameMoney << " - Credit" <<  endl;    //print remaning credit 
             cout << "$" << fixed << setprecision(2) << usrBet << " - Current Bet" <<  endl;    //print remaning credit 
 
             //Game start
@@ -105,17 +112,17 @@ poker.printArt();
             //win multiply
             if(betMultiply != -1) 
             {
-                gameMoneyPoker = gameMoneyPoker + usrBet; // return the inital bet 
+                gameMoney = gameMoney + usrBet; // return the inital bet 
                 usrBet = usrBet * betMultiply;  //multiply the bet 
-                gameMoneyPoker = gameMoneyPoker + usrBet;
-                poker.setStartMon(gameMoneyPoker);  //update class staring money
+                gameMoney = gameMoney + usrBet;
+                poker.setGameMoney(gameMoney);  //update class staring money
                 cout << "You Won! " << "$" << fixed << setprecision(2) << usrBet << "- added to credit" <<  endl;    //print remaning credit   << usrBet;        
             } else 
             {
                 cout << "You Lose" << endl; 
             }
 
-            poker.setStartMon(gameMoneyPoker);  //update class staring money
+            poker.setGameMoney(gameMoney);  //update class staring money
 
             //game over
             cout << "Game over - returning to menu" << endl;
@@ -134,24 +141,25 @@ poker.printArt();
             }
         break;
 
-    case 2:     //black jack
+    //BLACK JACK CODE
+    case 2:     
     cout << endl << spade << club << heart << diamond << " Black Jack! " << spade << club << heart << diamond  << endl;
 
-    //get starting money for each game from user
-    gameMoneyBJ = bj.getBJMoney();
-    bj.setBJMoney(gameMoneyBJ); //set the money
-
     //game loop
-    while(BJplayAgain == 'y') 
+    while(BJplayAgain == 'y' || BJplayAgain == 'Y') 
     {
-        cout << "$" << fixed << setprecision(2) << gameMoneyBJ << " - Credit" <<  endl;    //print remaning credit 
+        cout << "$" << fixed << setprecision(2) << gameMoney << " - Credit" <<  endl;    //print remaning credit 
+        bj.setBJMoney(gameMoney);  //set the class variable for calculation 
+
 
         //get round bet
-        bj.setBJMoney(gameMoneyBJ);  //update class staring money
-        BJbet = bj.getBJbet();    
+        bj.setGameMoney(gameMoney);  //update class staring money
+        BJbet = bj.getBJbet(gameMoney);    
+
         
-        //bet DOES NOT SUBTRACT FROM GAMEMONEYBJ
-        cout << "$" << fixed << setprecision(2) << gameMoneyBJ << " - Credit" << endl;    //print remaning credit 
+        
+        //bet DOES NOT SUBTRACT FROM GAMEMONEY
+        cout << "$" << fixed << setprecision(2) << gameMoney << " - Credit" << endl;    //print remaning credit 
         cout << "$" << fixed << setprecision(2) << BJbet << " - Current Bet" << endl << endl;    //print remaning credit 
 
         //game start 
@@ -188,10 +196,12 @@ poker.printArt();
                 cout << "Dealer Hand" << endl;
                 bj.printHand(bj.BJdealerHand, MAXCARDS);//inheritance
 
-                bj.checkWinner();   //check winning conditions 
+            gameMoney = bj.checkWinner();   //check winning conditions 
+            bj.setGameMoney(gameMoney);
 
-                gameMoneyBJ = bj.returnMoney(); //return the class money value
-                cout << "$" << fixed << setprecision(2) << gameMoneyBJ << " - Credit" << endl;    //print remaning credit
+
+                //gameMoney = bj.returnMoney(); //return the class money value
+                cout << "$" << fixed << setprecision(2) << gameMoney << " - Credit" << endl;    //print remaning credit
 
         //game over
         cout << "Game over - returning to menu" << endl;
@@ -213,11 +223,13 @@ poker.printArt();
 
     break;
     case 3: //exit program
-        cout << "Exiting Program - Thanks for playing" << endl;
-        exit(0);
-
         //print Credit - Cash out
+        cout << "Your Cash out balance - ";
+        cout << "$" << fixed << setprecision(2) << gameMoney <<  endl;    //print remaning credit 
 
+        cout << "Exiting Program - Thanks for playing" << endl;
+
+        exit(0);
         break;
 
     default:

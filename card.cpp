@@ -723,3 +723,22 @@ void Card::printArt() {
     std::cout << "     |     o |/   \\ o/  o  /" << std::endl;
     std::cout << "     '-------'     \\/____o/" << std::endl << std::endl;
 }
+
+double Card::getGameMoney() //get starting money for each game 
+{
+  cout << "Enter amount of money to play" << endl;
+    while(!(cin >> gameMoney))  //error check
+    {
+        cin.clear();
+        cin.ignore();
+    }
+    return gameMoney;
+}
+
+//update game money value
+void Card::setGameMoney(double x) 
+{
+    gameMoney = x;
+}
+
+

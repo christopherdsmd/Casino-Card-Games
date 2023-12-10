@@ -6,7 +6,6 @@ using namespace std;
 
 BlackJack::BlackJack() 
 {
-    BJmoney = 0.00;   //starting money
     BJbet = 0.00;         //current user bet
     MAXCARDS = 10;
     playerbj = false;       
@@ -14,27 +13,18 @@ BlackJack::BlackJack()
     insurance = false;    //insurance from check insurance
 }
 
-double BlackJack::getBJMoney()
+//set the BJMoney value to a copy of the gameMoney from main
+void BlackJack::setBJMoney(double gameMoney) 
 {
-  cout << "Enter amount of money to play" << endl;
-    while(!(cin >> BJmoney))  //error check
-    {
-        cin.clear();
-        cin.ignore();
-    }
-    return BJmoney;
+    BJmoney = gameMoney;
 }
 
-void BlackJack::setBJMoney(double val)
-{
-    BJmoney = val;
-}
-
-double BlackJack::getBJbet()
+//param is current game money, makes sure bet cannot be greater
+double BlackJack::getBJbet(double gamemoneycheck)
 {
    cout << "How much money would you like to bet" << endl;
 
-    while(!(cin >> BJbet) || BJbet > BJmoney)    //error check, bet must be less than or equal to staring money
+    while(!(cin >> BJbet) || BJbet > gamemoneycheck)    //error check, bet must be less than or equal to staring money
     {
         cout << "Invalid bet amount - must be less than or equal to credit value"  << endl;
         cin.clear();
@@ -148,26 +138,28 @@ bool BlackJack::CheckplayerBJ()
     return false; 
 }
 
-void BlackJack::checkWinner()   //rewards - return bet value multiplier 
+double BlackJack::checkWinner()   //rewards - return bet value multiplier 
 {
     //both player and dealer blackjack
     if (dealerbj && playerbj) {
         if (insurance)  {   
-        //if insurance was purchased - insurance == true 
-        //bet was halfed in checkinsurance()
-        cout << "Insurance returned - $" << BJbet << endl;  //return bet that was subtracted in half from insurance
-        BJmoney -= BJbet;    //update starting money
-        setBJbet(BJbet);
-        setBJMoney(BJmoney);  //update class starting money
+            //if insurance was purchased - insurance == true 
+            //bet was halfed in checkinsurance()
+            cout << "Insurance returned - $" << BJbet << endl;  //return bet that was subtracted in half from insurance
+            BJmoney -= BJbet;    //update starting money
+
+            setBJbet(BJbet);
+            return BJmoney;
         } else {
-        cout << "Push - Dealer and Player have Black Jack" << endl; 
-        cout << "You Lost - $" << BJbet << endl; 
-        BJmoney -= BJbet;   //subtract the bet
-        setBJbet(BJbet);
-        setBJMoney(BJmoney);  //update class starting money
-        return; //lost subtract bet value from gamemoney pool
+
+            cout << "Push - Dealer and Player have Black Jack" << endl; 
+            cout << "You Lost - $" << BJbet << endl; 
+            BJmoney -= BJbet;   //subtract the bet
+
+            setBJbet(BJbet);
+            return BJmoney;
     }
-    }
+}
 
    if(dealerbj && !playerbj) //if dealer has black jack and player doesnt
         {
@@ -178,37 +170,37 @@ void BlackJack::checkWinner()   //rewards - return bet value multiplier
                     cout << "Insurance returned - $" << BJbet << endl;  //return bet that was subtracted in half from insurance
                     BJmoney -= BJbet;   //subtract the bet
                     setBJbet(BJbet);
-                    setBJMoney(BJmoney);  //update class starting money
                     } else {
+            
                     cout << "You Lost - $" << BJbet << endl; 
                     BJmoney -= BJbet;   //subtract the bet
+
                     setBJbet(BJbet);
-                    setBJMoney(BJmoney);  //update class starting money
                     }
-            return;
+                return BJmoney; //return the money
         }
         
         //if player has blackjack dealer does not
     if (playerbj && !dealerbj) {  
             cout << "You have Black Jack " << endl;
+
             BJbet *= 1.5;
             cout << "You Won - $" << BJbet << endl;
 
             //update winning bet value 
             BJmoney += BJbet;
             setBJbet(BJbet);
-            setBJMoney(BJmoney);  //update class starting money
-            return;
+            return BJmoney;
         } 
 
     if(dealerCounter > 21 && playerCounter > 21) 
     {
            cout << "Push - Player and Dealer went over 21 " << endl;
             cout << "Bet returned - $" << BJbet << endl; 
+            
             //update winning bet value 
             setBJbet(BJbet);
-            setBJMoney(BJmoney);  //update class starting money
-            return;
+            return BJmoney;
     }
 
     if (dealerCounter > 21) {   
@@ -217,12 +209,13 @@ void BlackJack::checkWinner()   //rewards - return bet value multiplier
         //you won 
         cout << "You Won - $" << BJbet << endl;
     
+
             //update winning bet value 
             BJmoney += BJbet;
+
+
             setBJbet(BJbet);
-            setBJMoney(BJmoney);  //update class starting money
-    
-        return;
+            return BJmoney;
     }
 
     // No dealer blackjack or bust case
@@ -236,15 +229,12 @@ void BlackJack::checkWinner()   //rewards - return bet value multiplier
                     cout << "Insurance returned - $" << BJbet << endl;  //return bet that was subtracted in half from insurance
                     BJmoney -= BJbet;   //subtract the bet
                     setBJbet(BJbet);
-                    setBJMoney(BJmoney);  //update class starting money
-                    } else {
 
-
+            } else {
             BJmoney -= BJbet;   //subtract the bet
             setBJbet(BJbet);
-            setBJMoney(BJmoney);  //update class starting money
-            return;
-                }
+            return BJmoney;
+            }
         } 
      
         if (playerCounter == dealerCounter) {
@@ -252,19 +242,18 @@ void BlackJack::checkWinner()   //rewards - return bet value multiplier
             cout << "Bet returned - $" << BJbet << endl; 
             //update winning bet value 
             setBJbet(BJbet);
-            setBJMoney(BJmoney);  //update class starting money
-            return;
+            return BJmoney;
         }
 
         //if player has > dealer and is < 21
         if (playerCounter > dealerCounter && playerCounter < 21) {
             cout << "You Won - $" << BJbet << endl;
-
+            
             //update winning bet value 
             BJmoney += BJbet;
+
             setBJbet(BJbet);
-            setBJMoney(BJmoney);  //update class starting money
-            return;
+            return BJmoney;
         } 
 
         if(dealerCounter > playerCounter && dealerCounter < 21) {
@@ -275,14 +264,14 @@ void BlackJack::checkWinner()   //rewards - return bet value multiplier
                     //bet was halfed in checkinsurance()
                     cout << "Insurance returned - $" << BJbet << endl;  //return bet that was subtracted in half from insurance
                    BJmoney -= BJbet;   //subtract the bet
-                    setBJMoney(BJmoney);  //update class starting money
                     } else {
             BJmoney -= BJbet;   //subtract the bet
             setBJbet(BJbet);
-            setBJMoney(BJmoney);  //update class starting money
-            return;
+            
         }
+        return BJmoney;
     }
+    return BJmoney;
 }
 
 

@@ -14,12 +14,9 @@ class Poker: public Card    //inherit card class
         Poker();    //constructor - display poker starting text - set variables for game
         ACard pokerHand[5]; // 5 card hand for poker game 
 
-        //getter 
-        double getstartMon();
-        double getuserBet();
+        double getuserBet(double betchecker);   //gets use bet value , the bet checker param is passed copy of current game money credit used to make sure bets cannot be greater the game money
 
         //setter
-        void setStartMon(double x); //update starting money
         void holdRedraw(int size); //function for hold or redraw hand. param for itteration
         int handCheck(int size);    //function to check if user has winning hand and return multiplied bet
         void printTable();  //cout to user possible winning hands and the multiplier 

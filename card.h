@@ -21,16 +21,20 @@ const char diamond[4] = "\xe2\x99\xa6";
 class Card //stores deck of card and multiuse function for diffrent card games
 {
     private:
-        ACard Cards[52];  //array - deck of 52 cards 
-        int nextCard;    //return index for next available card 
+        ACard Cards[52];                 //array - deck of 52 cards 
+        int nextCard;                   //return index for next available card 
+        double gameMoney;               //game money for the entire game
 
     public:
-        Card();  //constructor sets the 52 cards before shuffle 
-        void shuffleCard(); //rand num generator shuffle cards 
-        ACard getCard(); //getter
+        Card();                          //constructor sets the 52 cards before shuffle 
+        void shuffleCard();             //rand num generator shuffle cards 
+        ACard getCard();                //getter
+
+        double getGameMoney();           //get the starting monet value for the entire game
+        void setGameMoney(double x);     //update starting money
 
         //functions to display the cards output
-        void CardAce(char suit[], int i); // ACE - 1
+        void CardAce(char suit[], int i);    // ACE - 1
         void CardTwo(char suit[], int i);
         void CardThree(char suit[], int i);
         void CardFour(char suit[], int i);

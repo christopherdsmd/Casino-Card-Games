@@ -14,22 +14,12 @@ Poker::Poker() //initalize vars
          handSize =5;
 }   
 
-double Poker::getstartMon() //get starting money for each game 
-{
-  cout << "Enter amount of money to play" << endl;
-    while(!(cin >> startingMoney))  //error check
-    {
-        cin.clear();
-        cin.ignore();
-    }
-    return startingMoney;
-}
-
-double Poker::getuserBet()   //getter user bet for each round
+//gets use bet value , the bet checker param is passed copy of current game money credit used to make sure bets cannot be greater the game money
+double Poker::getuserBet(double creditChecker)   //getter user bet for each round
 {
     cout << "How much money would you like to bet" << endl;
 
-    while(!(cin >> userBet) || userBet > startingMoney)    //error check, bet must be less than or equal to staring money
+    while(!(cin >> userBet) || userBet > creditChecker)    //error check, bet must be less than or equal to staring money
     {
         cout << "Invalid bet amount - must be less than or equal to credit value"  << endl;
         cin.clear();
@@ -38,11 +28,8 @@ double Poker::getuserBet()   //getter user bet for each round
     return userBet;
 }
 
-//updates staring bet
-void Poker::setStartMon(double x) 
-{
-    startingMoney = x;
-}
+
+
 
 void Poker::holdRedraw(int size) 
 {
